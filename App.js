@@ -28,7 +28,6 @@ export default function App() {
       <Hadith/>
 
       <View style={styles.surahsContainer}>
-        <Text>Surah Container</Text>
         <SurahsContainer />
       </View>
     </View>
@@ -39,11 +38,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FFF8DC',
-    padding: 15,
   },
   appNameContainer: {
     flex: 1,
-    paddingTop: 5
+    paddingTop: 60,
+    paddingHorizontal: 20
   },
   appName: {
     fontSize: 48,
