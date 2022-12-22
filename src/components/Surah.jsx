@@ -4,7 +4,7 @@ export default function Surah(props) {
     // {console.log(props)}
     return (
         <View style={styles.container}>
-            <Text>{props.name}</Text>
+            <Text style={{fontSize: 24}}>{props.name}</Text>
         </View>
     )
 }
@@ -12,11 +12,18 @@ export default function Surah(props) {
 const styles = StyleSheet.create({
     container: {
         justifyContent: "center",
-        backgroundColor: "white",
-        borderRadius: 40,
-        shadowColor: "black",
+        backgroundColor: "#F9FEFF",
+        borderRadius: 10,
+        shadowColor: "#000000",
         shadowOpacity: 0.8,
-        padding: 2,
-
+        shadowRadius: 2,
+        shadowOffset: {
+        height: 1,
+        width: 1
+        },
+        paddingHorizontal: 5,
+        paddingVertical: 10,
+        marginVertical: 5,
+        marginHorizontal: 20,
     }
 })
