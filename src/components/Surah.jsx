@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
 export default function Surah(props) {
-    // {console.log(props)}
     return (
         <View style={styles.container}>
             <Text style={{fontSize: 24}}>{props.name}</Text>
