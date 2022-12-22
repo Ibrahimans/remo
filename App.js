@@ -1,11 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { Entypo } from '@expo/vector-icons';
+import Hadith from './src/components/Hadith';
+import Surah from './src/components/Surah';
+import SurahsContainer from './src/components/SurahsContainer';
+import surahs from './src/data/surahs.json';
+
 
 export default function App() {
+
+  const create_surahs = () => {
+    console.log(surahs);
+  }
+
   return (
+    
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
       <StatusBar style="auto" />
+      <View style={styles.appNameContainer}>
+        <View style={{flexDirection: "row"}}>
+          <Entypo name="open-book" size={48} color="#A0522D" style={{padding: 5}}/>
+          <Text style={styles.appName}>ReMo</Text>
+        </View>
+        <Text style={styles.slogan}>The Quran Review and Memorization App</Text> 
+      </View>
+
+      <Hadith/>
+
+      <View style={styles.surahsContainer}>
+        <Text>Surah Container</Text>
+        <SurahsContainer />
+      </View>
     </View>
   );
 }
@@ -13,8 +38,26 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#FFF8DC',
+    padding: 15,
   },
+  appNameContainer: {
+    flex: 1,
+    paddingTop: 5
+  },
+  appName: {
+    fontSize: 48,
+    color: "#A0522D",
+  },
+  slogan: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: "#A0522D",
+  },
+
+  surahsContainer: {
+    flex: 4,
+    // backgroundColor: 'red',
+  }
 });
+
