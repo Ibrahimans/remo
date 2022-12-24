@@ -6,12 +6,12 @@ export default function SurahsContainer(){
 
     return (
         <ScrollView>
-            {console.log(surahs[0].name)}
+            {/* {console.log(surahs[0].name)} */}
 
             <FlatList 
             data={surahs} 
             renderItem={(surahObj) => {
-                console.log(surahObj)
+                // console.log(surahObj)
                 return <Surah name={surahObj.item.name} />
             }}
             />
