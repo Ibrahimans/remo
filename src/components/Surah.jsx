@@ -1,10 +1,13 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default function Surah(props) {
+    const handlePress = () => console.log(props.name)
     return (
-        <View style={styles.container}>
-            <Text style={{fontSize: 24}}>{props.name}</Text>
-        </View>
+        <TouchableOpacity onPress={handlePress}>
+            <View style={styles.container}>
+                <Text style={{fontSize: 24}}>{props.name}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 
