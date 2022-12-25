@@ -1,10 +1,17 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+
 
 export default function Surah(props) {
+    const navigation = useNavigation();
     return (
-        <View style={styles.container}>
-            <Text style={{fontSize: 24}}>{props.name}</Text>
-        </View>
+        <TouchableOpacity onPress={() => navigation.navigate("SurahInfo", {item: props})}>
+            <View style={styles.container}>
+                <Text style={{fontSize: 24}}>{props.name}</Text>
+            </View>
+        </TouchableOpacity>
     )
 }
 
@@ -26,3 +33,4 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     }
 })
+

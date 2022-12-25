@@ -1,12 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./src/screens/Home";
+import SurahScreen from "./src/screens/SurahScreen";
 import AppHeader from './src/components/AppHeader';
 import Hadith from './src/components/Hadith';
 import SurahsContainer from './src/components/SurahsContainer';
 import NotesTemplate from './src/data/notes-template.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { setState, useState, useEffect } from 'react';
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
 
@@ -33,48 +36,18 @@ export default function App() {
 
     setLoading(false);
   }, []);
-  
-  // const storeData = async (value) => {
-  //   try {
-  //     const jsonValue = JSON.stringify(value)
-  //     console.log("Value: " + jsonValue);
-  //     await AsyncStorage.setItem('test_token', jsonValue)
-  //   } catch (e) {
-  //     // saving error
-  //   }
-  // }
-
-  // const getData = async () => {
-  //   try {
-  //     const jsonValue = await AsyncStorage.getItem('test_token')
-  //     console.log("Value: " + jsonValue);
-  //     return jsonValue != null ? JSON.parse(jsonValue) : null;
-  //   } catch(e) {
-  //     console.log(e)
-  //     // error reading value
-  //   }
-  // }
 
   // const resetAllNotes = async () => {
-  //   try {
-
-  //   }
   // }
+  
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <AppHeader />
-      <Hadith/>
-      <SurahsContainer />
-
-    </View>
-  );
+    <NavigationContainer >
+      <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Group screenOptions={{presentation: "modal"}}>
+          <Stack.Screen name="SurahInfo" component={SurahScreen} />
+        </Stack.Group>
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF8DC',
-  },
-});
-
