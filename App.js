@@ -2,12 +2,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./src/screens/Home";
 import SurahScreen from "./src/screens/SurahScreen";
-import AppHeader from './src/components/AppHeader';
-import Hadith from './src/components/Hadith';
-import SurahsContainer from './src/components/SurahsContainer';
 import NotesTemplate from './src/data/notes-template.json';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { setState, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 const Stack = createNativeStackNavigator();
 
