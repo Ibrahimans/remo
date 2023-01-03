@@ -1,39 +1,56 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useState } from "react";
-import { Text, View,StyleSheet, TextInput, KeyboardAvoidingView, Button } from "react-native";
+import { useFocusEffect } from "@react-navigation/native";
+import { useCallback, useState } from "react";
+import { View,StyleSheet, TextInput } from "react-native";
 import NotesTemplate from '../data/notes-template.json';
 
 
 export default function Notes({surahId}){
     const [note, setNote] = useState()
 
-    const save = async (text) => {
-        try {
-            await AsyncStorage.setItem(surahId, text)
-            c = await AsyncStorage.getItem(surahId)
-            console.log(c)
 
-        } catch (error) {
-          // Error saving data
-        }
-      };
+    useFocusEffect(
+        useCallback(() => {
+            console.log("screen focused")
+            return async () => {
+                console.log("screen unfocused");
+                try {
+                    await AsyncStorage.setItem(surahId, note)
+                    const c = await AsyncStorage.getItem(surahId)
+                    console.log(c)
+        
+                } catch (error) {
+                  // Error saving data
+                  console.log(error)
+                }
+
+            }
+        }, [note] )
+    )
+    // const save = async (text) => {
     
-    const lastEntry = async () => {
-        try{
-            setNote(await AsyncStorage.getItem(surahId))
-        }catch (error){
-            console.log("lastEntry error")
-        }
+    //   };
+    
+    // const lastEntry = async () => {
+    //     try{
+    //         setNote(await AsyncStorage.getItem(surahId))
+    //     }catch (error){
+    //         console.log("lastEntry error")
+    //     }
+    // }
+    
+    const saveToNote = text => {
+        setNote(text)
+        console.log(note)
     }
     
-    
-    lastEntry()
-    console.log(note)
+    // lastEntry()
+    // console.log(note)
     return (
         <View style={styles.container}>
             <TextInput 
-                defaultValue={note}
-                onChangeText={save}
+                // defaultValue={note}
+                onChangeText={(text) => setNote(text)}
                 multiline={true}
                 
 
