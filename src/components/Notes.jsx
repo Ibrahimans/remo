@@ -12,6 +12,8 @@ export default function Notes({surahId}){
     useFocusEffect(
         useCallback(() => {
             console.log("screen focused")
+            //surah item
+            //setNote(item)
             return async () => {
                 console.log("screen unfocused");
                 try {
