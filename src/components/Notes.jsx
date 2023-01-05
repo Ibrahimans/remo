@@ -14,6 +14,7 @@ export default function Notes({surahId}){
             console.log("screen focused")
             //surah item
             //setNote(item)
+            //update notes here
             return async () => {
                 console.log("screen unfocused");
                 try {
@@ -29,10 +30,7 @@ export default function Notes({surahId}){
             }
         }, [note] )
     )
-    // const save = async (text) => {
-    
-    //   };
-    
+
     // const lastEntry = async () => {
     //     try{
     //         setNote(await AsyncStorage.getItem(surahId))
@@ -48,6 +46,9 @@ export default function Notes({surahId}){
     
     // lastEntry()
     // console.log(note)
+
+
+    //TODO: make bullet points work in textinput
     return (
         <View style={styles.container}>
             <TextInput 
