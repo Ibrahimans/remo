@@ -24,15 +24,18 @@ export default function Notes({surahId}){
         }
     };
     
+
     useFocusEffect(
-        useCallback(() => {
+        useCallback( () => {
+            console.log("focused")
             get();
             return () => {
-                console.log("unfocused");
-                
+                console.log("unfocused")
+                save();
             }
+        
         }, [])
-    );
+    )
 
     
     //TODO: make bullet points work in textinput
