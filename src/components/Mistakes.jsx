@@ -6,7 +6,9 @@ export default function Mistakes({surah}){
     return (
         <View>
             <Text>mistakes r here</Text>
-            <TextInput/> 
+            <TextInput
+                
+            /> 
         </View>
     )
 }

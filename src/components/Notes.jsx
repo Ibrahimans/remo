@@ -1,62 +1,48 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useFocusEffect } from "@react-navigation/native";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { View,StyleSheet, TextInput } from "react-native";
 import NotesTemplate from '../data/notes-template.json';
 
 
 export default function Notes({surahId}){
     const [note, setNote] = useState()
-
-
+    const get = async () => {
+        try {
+            const data = await AsyncStorage.getItem(surahId);
+            setNote(data);
+        } catch (e) {
+            console.log(e);
+        }
+    };
+    const save = async () => {
+        try {
+            console.log("note in save():", note)
+            await AsyncStorage.setItem(surahId, note)
+        } catch (error) {
+            console.log("save error:", error)
+        }
+    };
+    
     useFocusEffect(
         useCallback(() => {
-            console.log("screen focused")
-            //surah item
-            //setNote(item)
-            //update notes here
-            return async () => {
-                console.log("screen unfocused");
-                try {
-                    await AsyncStorage.setItem(surahId, note)
-                    const c = await AsyncStorage.getItem(surahId)
-                    console.log(c)
-        
-                } catch (error) {
-                  // Error saving data
-                  console.log(error)
-                }
-
+            get();
+            return () => {
+                console.log("unfocused");
+                
             }
-        }, [note] )
-    )
+        }, [])
+    );
 
-    // const lastEntry = async () => {
-    //     try{
-    //         setNote(await AsyncStorage.getItem(surahId))
-    //     }catch (error){
-    //         console.log("lastEntry error")
-    //     }
-    // }
     
-    const saveToNote = text => {
-        setNote(text)
-        console.log(note)
-    }
-    
-    // lastEntry()
-    // console.log(note)
-
-
     //TODO: make bullet points work in textinput
     return (
         <View style={styles.container}>
             <TextInput 
                 // defaultValue={note}
+                value={note}
                 onChangeText={(text) => setNote(text)}
                 multiline={true}
-                
-
             />
             
         </View>

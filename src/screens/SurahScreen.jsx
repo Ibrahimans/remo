@@ -8,7 +8,6 @@ export default function SurahScreen({route, navigation}){
     return (
         <View style={styles.container}>
             <Text style={styles.lightHeader}>{p.item.name}</Text>
-            <Mistakes />
             <Notes surahId={p.item.name}/>
         </View>
     )
