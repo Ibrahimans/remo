@@ -5,7 +5,7 @@ export default function SurahScreen({route, navigation}){
     const p = route.params;
     return (
         <View style={styles.container}>
-            <Text style={styles.lightHeader}>{p.item.name}</Text>
+            <Text style={styles.lightHeader}>{p.item.surahObj.name}</Text>
         </View>
     )
 
