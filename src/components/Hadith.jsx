@@ -27,7 +27,7 @@ export default function Hadith() {
                 console.error(error);
               }
         }
-        getHadith();
+//         getHadith();
       }, []);
 
     return (
