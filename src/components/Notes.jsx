@@ -17,12 +17,10 @@ export default function Notes({surahId}){
     // useEffect will only be run on the first focus. It will be used only to grab data from Async
     useEffect(() => {
         console.log("UseEffectRun");
-        
         async function fetchData() {
-            const n = await AsyncStorage.getItem(surahId);
-            if (n != null){
-                const jsonVal = JSON.parse(n)
-                console.log("nword",jsonVal)
+            const items = await AsyncStorage.getItem(surahId);
+            if (items != null){
+                const jsonVal = JSON.parse(items)
                 setSurahInfo(jsonVal);
                 console.log(surahInfo)
             }
