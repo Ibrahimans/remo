@@ -16,9 +16,6 @@ export default function Surah(props) {
                     <Text style={{fontSize: 18, flex: 1}}>{props.surahObj.name}</Text>
                     <Text style={{fontSize: 18 ,flex:1, textAlign:'right'}}>{props.surahObj.name_arabic}</Text>
                 </View>
-                {/* <View style={styles.score_container}>
-                        <Text style={styles.score}>100%</Text>
-                </View> */}
             </View>
         </TouchableOpacity>
     )
