@@ -12,11 +12,7 @@ export default function Notes({surahId}){
     const [surahInfo, setSurahInfo] = useState({note: null, mistakesPerPage: null, date: null })
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false)    
 
-
-    
-    // useEffect will only be run on the first focus. It will be used only to grab data from Async
     useEffect(() => {
-        console.log("UseEffectRun");
         async function fetchData() {
             const items = await AsyncStorage.getItem(surahId);
             if (items != null){
@@ -29,13 +25,11 @@ export default function Notes({surahId}){
         
         }, [])
 
-    // useFocusEffect will run every time there is a change to the textInput (and needs to to properly update state). In order to avoid continually getting from async storage useEffect is used on first focus only
     useEffect(() => {
         async function saveData() {
             console.log(surahInfo)
             const info = JSON.stringify(surahInfo)
             console.log("from save" , surahInfo)
-            //console.log(info + "from save")
             await AsyncStorage.setItem(surahId, info)
 
         }
@@ -70,7 +64,7 @@ export default function Notes({surahId}){
     }
 
     return (
-        <View style={{}}>
+        <View>
             <KeyboardAvoidingView behavior='height' style={styles.header}>
                 <Text style={styles.title}>{surahId}</Text>
                 <KeyboardAvoidingView style={{alignItems: "center"}}>
