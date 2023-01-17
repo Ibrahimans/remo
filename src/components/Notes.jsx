@@ -9,7 +9,7 @@ import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor"
 
 export default function Notes({surahId}){
     const RichText = useRef();
-    const [surahInfo, setSurahInfo] = useState({note: null, mistakesPerPage: null, date: null })
+    const [surahInfo, setSurahInfo] = useState({note: null, mistakesPerPage: null, date: null, inMySurahs: false })
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false)    
 
     useEffect(() => {
@@ -43,7 +43,16 @@ export default function Notes({surahId}){
           }
     }, [surahInfo])
 
-
+    const addToMySurahTest = async () => {
+        const prev = await AsyncStorage.getItem('MySurahs')
+        const save = prev != null ? JSON.parse(prev) : []
+        if (!save.includes(surahId)){
+            save.push(surahId)
+            await AsyncStorage.setItem('MySurahs', JSON.stringify(save))
+        }
+        
+        console.log(save)
+    }
    
     const showDatePicker = () => {
         setDatePickerVisibility(true);
@@ -67,6 +76,9 @@ export default function Notes({surahId}){
         <View>
             <KeyboardAvoidingView behavior='height' style={styles.header}>
                 <Text style={styles.title}>{surahId}</Text>
+                <TouchableOpacity onPress={addToMySurahTest}>
+                    <Text>Add to My Surahs</Text>
+                </TouchableOpacity>
                 <KeyboardAvoidingView style={{alignItems: "center"}}>
                     <Text>Mistakes:</Text>
                     <TextInput 

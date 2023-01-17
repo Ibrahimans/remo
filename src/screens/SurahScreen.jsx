@@ -6,7 +6,7 @@ export default function SurahScreen({route, navigation}){
     const p = route.params;
     return (
         <View style={styles.container}>
-            <Notes surahId={p.item.name}/>
+            <Notes surahId={p.item.surahObj.name}/>
         </View>
     )
 
