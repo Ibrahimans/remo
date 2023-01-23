@@ -1,14 +1,19 @@
-import { Text, View, ScrollView } from "react-native";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import Surah from "./Surah";
-import surahs from "../data/surahs.json"
 import JuzHeader from "./JuzHeader";
+import { useState } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function SurahsContainer(){
+export default function SurahsContainer({surahList}){
+    console.log(surahList)
+   
     return (
         <View style={{flex:4}}>
             <ScrollView>
-                {surahs.map((surahObj) => {
-                    if (surahObj.id == 1 || surahs[surahObj.id - 2].starting_juz != surahObj.starting_juz) {
+                {surahList.map((surahObj) => {
+                        //lets puts surahs with the same juz under one juz header
+                    // if (surahObj.id == 1 || surahList[surahObj.id - 2].starting_juz != surahObj.starting_juz) {
+                    if (true) {
                         return(
                             <View key={surahObj.id}>
                                 <JuzHeader surahObj={surahObj} />

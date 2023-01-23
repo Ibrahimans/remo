@@ -11,8 +11,15 @@ import surahs from '../data/surahs.json';
 
 
 export default function Home() {
+  // plan for populating my surahs:
+  //   make a state at Home
+  //   pass state to Notes
+  //   state gets populated when the user presses add to my surahs
+  //   state is passed as a prop to surah container
+
   const [surahNotes, setSurahNotes] = useState({});
-  const [tabShown, setTabShown] = useState(false);
+  const [surahShown, setSurahsShown] = useState(surahs); //pass on to surahs container
+  const [tabShown, setTabShown] = useState(false);//prob wont need
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -37,6 +44,19 @@ export default function Home() {
   }, []);
 
 
+    const changeToMySurahs = async () => {
+        const testing = await AsyncStorage.getItem('MySurahs')
+        
+        setSurahsShown(JSON.parse(testing))
+        // console.log(surahShown)
+    }
+
+    const changeToAllSurahs = () => {
+        
+        setSurahsShown(surahs)
+        // console.log(surahShown)
+    }
+
   if (loading) {
     return (
       <View style={styles.loading_screen_container}>
@@ -50,16 +70,15 @@ export default function Home() {
         <StatusBar style="auto" />
         <AppHeader />
         <Hadith/>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 40}}>
-          <TouchableOpacity >
-            <Text>All Surahs</Text>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', marginHorizontal: 20}}>
+          <TouchableOpacity onPress={changeToAllSurahs}>
+            <Text>all surahs</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
-            <Text>My Surahs</Text>
+          <TouchableOpacity onPress={changeToMySurahs}>
+            <Text>my surahs</Text>
           </TouchableOpacity>
         </View>
-
-        <SurahsContainer />
+        <SurahsContainer surahList={surahShown}/>
       </View>
     );
   }

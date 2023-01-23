@@ -7,14 +7,13 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Entypo } from '@expo/vector-icons';
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor"
 
-export default function Notes({surahId}){
+export default function Notes({surahObj}){
     const RichText = useRef();
     const [surahInfo, setSurahInfo] = useState({note: null, mistakesPerPage: null, date: null, inMySurahs: false })
     const [isDatePickerVisible, setDatePickerVisibility] = useState(false)    
-
     useEffect(() => {
         async function fetchData() {
-            const items = await AsyncStorage.getItem(surahId);
+            const items = await AsyncStorage.getItem(surahObj.name);
             if (items != null){
                 const jsonVal = JSON.parse(items)
                 setSurahInfo(jsonVal);
@@ -30,7 +29,7 @@ export default function Notes({surahId}){
             console.log(surahInfo)
             const info = JSON.stringify(surahInfo)
             console.log("from save" , surahInfo)
-            await AsyncStorage.setItem(surahId, info)
+            await AsyncStorage.setItem(surahObj.name, info)
 
         }
         const delayLocalSave = setTimeout(() => {
@@ -44,14 +43,20 @@ export default function Notes({surahId}){
     }, [surahInfo])
 
     const addToMySurahTest = async () => {
-        const prev = await AsyncStorage.getItem('MySurahs')
-        const save = prev != null ? JSON.parse(prev) : []
-        if (!save.includes(surahId)){
-            save.push(surahId)
-            await AsyncStorage.setItem('MySurahs', JSON.stringify(save))
+        try{
+            var prev = await AsyncStorage.getItem('MySurahs')
+            prev = prev == null ? "" : prev
+            const save = prev != "" ? JSON.parse(prev) : []
+            if (!prev.includes(JSON.stringify(surahObj))){
+                console.log(!prev.includes(JSON.stringify(surahObj)))
+                save.push(surahObj)
+                await AsyncStorage.setItem('MySurahs', JSON.stringify(save))
+            }
         }
-        
-        console.log(save)
+        catch(error){
+            await AsyncStorage.setItem("MySurahs", "")
+            console.log(error)
+        }
     }
    
     const showDatePicker = () => {
@@ -75,7 +80,7 @@ export default function Notes({surahId}){
     return (
         <View>
             <KeyboardAvoidingView behavior='height' style={styles.header}>
-                <Text style={styles.title}>{surahId}</Text>
+                <Text style={styles.title}>{surahObj.name}</Text>
                 <TouchableOpacity onPress={addToMySurahTest}>
                     <Text>Add to My Surahs</Text>
                 </TouchableOpacity>
