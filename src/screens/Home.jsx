@@ -8,6 +8,7 @@ import AppHeader from '../components/AppHeader';
 import Hadith from '../components/Hadith';
 import SurahsContainer from '../components/SurahsContainer';
 import surahs from '../data/surahs.json';
+import ReminderBox from '../components/ReminderBox';
 
 
 export default function Home() {
@@ -47,7 +48,7 @@ export default function Home() {
       <View style={styles.container}>
         <StatusBar style="auto" />
         <AppHeader />
-        <Hadith/>
+        <ReminderBox/>
         <SurahsContainer />
       </View>
     );
