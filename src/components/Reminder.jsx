@@ -4,34 +4,23 @@ import { View, KeyboardAvoidingView, StyleSheet, Text, TextInput,  } from "react
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 
 
-export default function Reminder() {
+export default function Reminder( {onReminderChange, reminderParData} ) {
     const RichText = useRef();
-    const [reminderData, setReminderData] = useState("");
-
-    useEffect(() => {
-        async function fetchData() {
-            const items = await AsyncStorage.getItem('reminder');
-            if (items != null){
-                setReminderData(items)
-                console.log(reminderData)
-            }
-        }
-        fetchData();
-
-    }, [])
+    const [reminderData, setReminderData] = useState(reminderParData);
 
     useEffect(() => {
         async function saveData() {
             await AsyncStorage.setItem('reminder', reminderData)
+            onReminderChange(reminderData)
         }
         const delayLocalSave = setTimeout(() => {
             saveData();
         }, 1000)
-
         return () => {
             clearTimeout(delayLocalSave);
         }
     }, [reminderData])
+
 
     return (
         <View>

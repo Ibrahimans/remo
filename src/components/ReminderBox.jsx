@@ -6,35 +6,24 @@ import { ScrollView, View, StyleSheet, Text, TouchableOpacity } from "react-nati
 import { actions, RichEditor, RichToolbar } from "react-native-pell-rich-editor";
 
 
-export default function ReminderBox(){
+export default function ReminderBox( {onReminderChange, reminderData} ){
     const RichText = useRef();
     const navigation = useNavigation();
-    const [reminderData, setReminderData] = useState("")
 
-    useFocusEffect(
-        useCallback(() => {
-        async function fetchData() {
-            const items = await AsyncStorage.getItem('reminder');
-            if (items != null){
-                setReminderData(items)
-                console.log(reminderData)
-            }
-        }
-        fetchData();
-    }, [])
-    )
+    // console.log(reminderData)
 
-
+ 
     return (
-        <TouchableOpacity onPress={() => navigation.navigate("Reminders")} style={styles.hadithContainer}>
+        <TouchableOpacity onPress={() => navigation.navigate("Reminders", {reminderData, onReminderChange})} 
+        style={styles.hadithContainer}>
                 <RichEditor
                 disabled={true}
                 ref={RichText}
                 placeholder={"Tap here to set reminders!"}
                 androidLayerType="software"
                 initialContentHTML={reminderData}
-                onChange={(text) => setReminderData(text)}
-                editorStyle= {styles.hadithContainer}
+                onChange={(text) => onReminderChange(text)}
+                editorStyle={styles.hadithContainer}
                 useContainer={false}
                 />
         </TouchableOpacity>

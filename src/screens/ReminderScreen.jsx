@@ -1,10 +1,11 @@
 import { StyleSheet, View } from "react-native";
 import Reminder from "../components/Reminder";
 
-export default function ReminderScreen() {
+export default function ReminderScreen( {route} ) {
+
     return (
         <View style={styles.container}>
-            <Reminder/>
+            <Reminder onReminderChange={route.params.onReminderChange} reminderParData={route.params.reminderData}/>
         </View>
     )
 }
