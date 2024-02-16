@@ -1,6 +1,6 @@
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
-import { htmlToText } from 'html-to-text';
+// import { htmlToText } from 'html-to-text';
 
 export default function Hadith() {
     const [hadith, setHadith] = useState('');
